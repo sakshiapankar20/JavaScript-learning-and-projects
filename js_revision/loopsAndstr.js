@@ -48,7 +48,73 @@ console.log(name.concat(" hello!"));
 
 
 
+let heroes=["ironman","thor","spiderman","loki"];
+
+for(let hero of heroes){
+
+    hero[0].toUpperCase()
+    console.log(hero);
+    
+}
+
+for(let i=0; i<heroes.length; i++){
+    heroes[i]=heroes[i][0].toUpperCase()+heroes[i].slice(1);
+    console.log(heroes[i]);
+}
+
+
+let exp="hello everyone sakshi here";
+
+exp=exp.split(" ");
+console.log(exp);
+
+let sen="";
+
+for(let i=0; i<exp.length; i++)
+{
+    exp[i]=exp[i][0].toUpperCase()+exp[i].slice(1);
+    sen+=exp[i]+" ";
+}
+console.log(exp);
+sen=sen.trim();
+
+console.log(sen);
+
+
+let arr=[85,97,44,37,76,60];
+
+let avg=0;
+let sum=0;
+
+for(let i of arr){
+
+    sum+=i;
+   
+}
+
+//  console.log(sum);
+// avg=sum/arr.length;
+// console.log(avg);
+
+
+let prices=[250,65,300,900,50];
 
 
 
+for(let i of prices){
+    i-=i*(10/100);
+    console.log(i);
+}
 
+//here original array 
+
+
+let ele=[250,65,300,900,50];
+ele.push(2);
+console.log(ele);
+ele.pop();
+console.log(ele);
+
+ele.toString();
+console.log(ele);
+console.log(ele.toString());
