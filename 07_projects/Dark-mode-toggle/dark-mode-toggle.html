@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dark / Light Mode Toggle — Simple Project</title>
+  <style>
+    /* CSS variables for light theme */
+    :root {
+      --bg: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --card: #f3f4f6;
+      --accent: #2563eb;
+      --transition: 200ms ease;
+    }
+
+    /* Dark theme overrides applied when [data-theme="dark"] is present */
+    :root[data-theme="dark"] {
+      --bg: #0b1220;
+      --text: #e6eef6;
+      --muted: #9aa6b2;
+      --card: #0f1724;
+      --accent: #60a5fa;
+    }
+
+    /* Basic page layout */
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.4;
+      -webkit-font-smoothing: antialiased;
+      transition: background var(--transition), color var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 760px;
+      background: var(--card);
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(2,6,23,0.12);
+      padding: 2rem;
+      transition: background var(--transition), box-shadow var(--transition);
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+
+    p.lead { color: var(--muted); margin: 0.25rem 0 1rem 0; }
+
+    /* Toggle button */
+    .toggle {
+      --size: 46px;
+      position: relative;
+      width: var(--size);
+      height: calc(var(--size) * 0.56);
+      background: linear-gradient(90deg, rgba(0,0,0,0.06), rgba(0,0,0,0.03));
+      border-radius: 999px;
+      padding: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      user-select: none;
+      transition: background var(--transition);
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    .toggle:focus { outline: 3px solid rgba(37,99,235,0.12); }
+    .knob {
+      width: calc(var(--size) * 0.46);
+      height: calc(var(--size) * 0.46);
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 2px 6px rgba(2,6,23,0.12);
+      transform: translateX(0);
+      transition: transform var(--transition), background var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+    }
+    :root[data-theme="dark"] .knob { background: #001022; color: var(--accent); }
+    :root[data-theme="dark"] .toggle { background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); border-color: rgba(255,255,255,0.04); }
+
+    /* Move knob to right in dark mode */
+    :root[data-theme="dark"] .knob { transform: translateX(22px); }
+
+    /* Demo content */
+    .grid { display: grid; gap: 1rem; grid-template-columns: 1fr 1fr; }
+    .box { background: rgba(0,0,0,0.03); padding: 1rem; border-radius: 8px; }
+    :root[data-theme="dark"] .box { background: rgba(255,255,255,0.03); }
+
+    footer { margin-top: 1rem; color: var(--muted); font-size: 0.9rem; }
+
+    /* Small screens */
+    @media (max-width: 520px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="card" role="main">
+    <header>
+      <div>
+        <h1>Dark / Light Mode Toggle</h1>
+        <p class="lead">A tiny accessible example that remembers your preference and respects system settings.</p>
+      </div>
+
+      <!-- Accessible control (button) -->
+      <button id="themeToggle" class="toggle" aria-pressed="false" aria-label="Toggle dark mode">
+        <span class="knob" aria-hidden="true">☀️</span>
+      </button>
+    </header>
+
+    <section class="grid">
+      <div class="box">
+        <h3>Preview</h3>
+        <p>This area shows how the page colors update when you switch themes.</p>
+      </div>
+      <div class="box">
+        <h3>Notes</h3>
+        <ul>
+          <li>Uses <code>data-theme="dark"</code> on <code>&lt;html&gt;</code> to switch themes.</li>
+          <li>Preference is saved to <code>localStorage</code> under <code>theme</code>.</li>
+          <li>Respects <code>prefers-color-scheme</code> on first load if no saved preference exists.</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>
+      Tip: press the <strong>D</strong> key to toggle theme (keyboard shortcut).
+    </footer>
+  </main>
+
+  <script>
+    (function () {
+      const KEY = 'theme';
+      const root = document.documentElement; // <html>
+      const toggle = document.getElementById('themeToggle');
+      const knob = toggle.querySelector('.knob');
+
+      // Utility to apply theme
+      function applyTheme(name) {
+        if (name === 'dark') {
+          root.setAttribute('data-theme', 'dark');
+          toggle.setAttribute('aria-pressed', 'true');
+          knob.textContent = '🌙';
+        } else {
+          root.removeAttribute('data-theme');
+          toggle.setAttribute('aria-pressed', 'false');
+          knob.textContent = '☀️';
+        }
+      }
+
+      // Read saved preference or use system preference
+      function getSavedOrSystemTheme() {
+        try {
+          const saved = localStorage.getItem(KEY);
+          if (saved === 'dark' || saved === 'light') return saved;
+        } catch (e) { /* localStorage might be disabled */ }
+
+        // fallback to system preference
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        return prefersDark ? 'dark' : 'light';
+      }
+
+      // Toggle and persist
+      function toggleTheme() {
+        const now = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        applyTheme(now);
+        try { localStorage.setItem(KEY, now); } catch (e) {}
+      }
+
+      // Initialize
+      applyTheme(getSavedOrSystemTheme());
+
+      // Event listeners
+      toggle.addEventListener('click', toggleTheme);
+      toggle.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleTheme(); }
+      });
+
+      // Keyboard shortcut: D
+      window.addEventListener('keydown', (e) => {
+        if (e.key.toLowerCase() === 'd' && !e.metaKey && !e.ctrlKey && !e.altKey) {
+          toggleTheme();
+        }
+      });
+
+      // Optional: respond to system changes if user hasn't explicitly chosen
+      try {
+        const mq = window.matchMedia('(prefers-color-scheme: dark)');
+        mq.addEventListener('change', (e) => {
+          const saved = localStorage.getItem(KEY);
+          if (saved !== 'dark' && saved !== 'light') {
+            applyTheme(e.matches ? 'dark' : 'light');
+          }
+        });
+      } catch (err) { /* not supported */ }
+    })();
+  </script>
+</body>
+</html>
