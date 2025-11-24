@@ -1,0 +1,102 @@
+
+*{
+    background-color: rgb(255, 255, 255);
+}
+
+
+h1{ 
+    color: darkblue;
+    text-align: center;
+    text-transform:uppercase;
+} 
+
+button{
+    color:white;
+    background-color: darkblue;
+    padding: 10px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+img{
+    background-color: black;
+}
+
+/* img:hover{
+    filter: blur(10px);
+    filter: brightness(200%);
+    filter: contrast(200%);
+    filter: drop-shadow(5px 5px 3px darkred);
+    filter: grayscale(200%);
+    filter: hue-rotate(360deg);
+    filter: invert(200%);
+
+    filter: opacity(.4);
+    filter: saturate(200%);
+    filter: sepia(200%);
+    
+    transition: 2s;
+} */
+
+a{
+    text-decoration: none;
+}
+#box{
+    margin-top: 20px;
+    background-color: rgb(195, 195, 244);
+    text-align: left;
+    text-align: right;
+    text-align: center;
+    text-align: justify;
+    text-align: start;
+    text-indent: 20px;
+    word-spacing: 5px;
+    letter-spacing: 3px;
+    line-height: 30px;
+    text-decoration: underline;
+    text-decoration: line-through;
+    text-decoration: overline;
+    text-decoration-style: wavy;
+    text-decoration: underline double red;
+    text-transform: capitalize;
+    
+}
+
+.heading{
+    color: red;
+}
+
+#btn{
+    background-color: green;
+}
+
+
+.container{
+    border: 2px solid darkorchid;
+    margin: 15px;
+    width: 200px;
+    height: 100px;
+    overflow: hidden;
+    overflow: scroll;
+    overflow: auto;
+    resize: both;
+    font-size: larger;
+    font-size: xx-large;
+    font-weight: lighter;
+    font-weight: bolder;
+    font-weight: 600;
+    font-weight: 200;
+    font-weight: normal;
+    font-weight: 900;
+    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: cursive;
+    font-family: fantasy;
+    font-family: monospace;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}

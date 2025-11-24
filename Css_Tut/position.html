@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>position</title>
+
+
+    <style>
+        div{
+            height: 100px;
+            width: 100px;
+            border: 2px solid darkslategrey;
+            background-color: cornflowerblue;
+
+            display: inline-block;
+        }
+
+        #box1{
+            background-color: lightcoral;
+            position: static;
+            /* this is not working because of static */
+            top: 50px;
+            right: 50px;  
+        }
+
+        #box2{
+            background-color: rgb(199, 154, 250);
+            position: relative;
+            top:10px;
+            left: 10px;
+        }
+
+        #box3{
+            background-color: lightgreen;
+            position: absolute;
+            top: 10px;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>Position Playground</h1>
+   
+    <div id="box1">box1</div>
+    <div id="box2">box2</div>
+    <div id="box3">box3</div>
+    <div id="box4">box4</div>
+</body>
+</html>
