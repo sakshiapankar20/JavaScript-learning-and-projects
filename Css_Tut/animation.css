@@ -1,0 +1,66 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+.main{
+
+    margin-top: 200px;
+    border: 2px solid black;
+    width: 500px;
+    height: 400px;
+}
+
+.child{
+    width: 80px;
+    height: 80px;
+    border: 2px solid blue;
+    margin: 5px;
+    position: relative;
+    animation: move;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes move {
+    0%{
+        top: 0;
+        left: 0;
+        background-color: rgb(6, 67, 233);
+    }
+
+    25%{
+        top: 0;
+        left: 400px;
+        background-color: rgb(136, 4, 180);
+    }
+
+    50%{
+        top:300px;
+        left:400px;
+
+       background-color: rgb(231, 16, 148);
+    }
+
+    75%{
+        top:300px;
+        left:0;
+        background-color: rgb(16, 244, 54);
+    }
+
+    100%{
+        top:0;
+        left:0;
+        background-color: blue;
+    }
+}
+
