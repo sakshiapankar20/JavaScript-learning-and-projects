@@ -1,0 +1,20 @@
+.board{
+  width: 600px;
+  height: 600px;
+  display:flex;
+  flex-wrap:wrap;       
+  align-content: start;
+  
+}
+
+.box{
+    box-sizing: border-box;
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+}
+
+
+.black{
+    background-color: black;
+}
